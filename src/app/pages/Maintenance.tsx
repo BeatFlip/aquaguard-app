@@ -150,11 +150,11 @@ export function Maintenance() {
 
       {/* Tasks List */}
       <Tabs defaultValue="upcoming" className="space-y-6">
-        <TabsList>
-          <TabsTrigger value="upcoming">Upcoming ({pendingTasks + scheduledTasks})</TabsTrigger>
-          <TabsTrigger value="pending">Pending ({pendingTasks})</TabsTrigger>
-          <TabsTrigger value="scheduled">Scheduled ({scheduledTasks})</TabsTrigger>
-          <TabsTrigger value="completed">Completed ({completedTasks})</TabsTrigger>
+        <TabsList className="w-full">
+          <TabsTrigger value="upcoming" className="flex-1">Upcoming ({pendingTasks + scheduledTasks})</TabsTrigger>
+          <TabsTrigger value="pending" className="flex-1">Pending ({pendingTasks})</TabsTrigger>
+          <TabsTrigger value="scheduled" className="flex-1">Scheduled ({scheduledTasks})</TabsTrigger>
+          <TabsTrigger value="completed" className="flex-1">Completed ({completedTasks})</TabsTrigger>
         </TabsList>
 
         <TabsContent value="upcoming" className="space-y-4">

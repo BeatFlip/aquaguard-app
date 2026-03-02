@@ -153,11 +153,11 @@ export function Alerts() {
 
       {/* Alerts List with Tabs */}
       <Tabs defaultValue="active" className="space-y-6">
-        <TabsList>
-          <TabsTrigger value="active">Active (3)</TabsTrigger>
-          <TabsTrigger value="acknowledged">Acknowledged (1)</TabsTrigger>
-          <TabsTrigger value="resolved">Resolved (1)</TabsTrigger>
-          <TabsTrigger value="all">All (5)</TabsTrigger>
+        <TabsList className="w-full">
+          <TabsTrigger value="active" className="flex-1">Active (3)</TabsTrigger>
+          <TabsTrigger value="acknowledged" className="flex-1">Acknowledged (1)</TabsTrigger>
+          <TabsTrigger value="resolved" className="flex-1">Resolved (1)</TabsTrigger>
+          <TabsTrigger value="all" className="flex-1">All (5)</TabsTrigger>
         </TabsList>
 
         <TabsContent value="active" className="space-y-4">
