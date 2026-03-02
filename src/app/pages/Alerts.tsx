@@ -281,7 +281,7 @@ function AlertCard({ alert }: { alert: typeof alerts[0] }) {
         )}
 
         {/* Actions */}
-        <div className="flex gap-3 pt-2">
+        <div className="flex flex-wrap gap-2 pt-2">
           {alert.status === "active" && (
             <>
               <Button size="sm">Acknowledge</Button>

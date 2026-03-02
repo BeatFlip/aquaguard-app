@@ -93,59 +93,126 @@ const statusStyles: Record<string, { bg: string; icon: string; badge: string }> 
   normal: { bg: "bg-blue-50", icon: "text-blue-600", badge: "bg-green-100 text-green-700" },
 };
 
+function batteryColor(pct: number) {
+  return pct < 20 ? "text-red-600" : pct < 50 ? "text-amber-600" : "text-green-600";
+}
+
 function SensorCard({ sensor }: { sensor: Sensor }) {
   const [expanded, setExpanded] = useState(false);
   const styles = statusStyles[sensor.status] ?? statusStyles.normal;
 
   return (
-    <Card className="p-4 sm:p-5">
-      {/* Header */}
-      <div className="flex items-center gap-3 mb-3">
-        <div className={`w-12 h-12 ${styles.bg} rounded-lg flex items-center justify-center flex-shrink-0`}>
-          <Droplets className={styles.icon} size={24} />
-        </div>
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            <h3 className="text-base font-semibold text-foreground">{sensor.location}</h3>
-            <Badge className={styles.badge}>{sensor.status}</Badge>
+    <Card className="p-4">
+      {/* ── Mobile layout ── */}
+      <div className="sm:hidden">
+        <div className="flex items-center gap-3 mb-3">
+          <div className={`w-10 h-10 ${styles.bg} rounded-lg flex items-center justify-center flex-shrink-0`}>
+            <Droplets className={styles.icon} size={18} />
           </div>
-          <p className="text-sm text-muted-foreground flex items-center gap-1 mt-0.5">
-            <MapPin size={12} />
-            {sensor.room}
-          </p>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="text-sm font-semibold text-foreground">{sensor.location}</h3>
+              <Badge className={`${styles.badge} text-xs`}>{sensor.status}</Badge>
+            </div>
+            <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
+              <MapPin size={11} />
+              {sensor.room}
+            </p>
+          </div>
         </div>
-      </div>
 
-      {/* Always visible: humidity + battery */}
-      <div className="grid grid-cols-2 gap-3 mb-3">
-        <div>
-          <p className="text-xs text-muted-foreground mb-0.5">Humidity</p>
-          <p className="text-lg font-semibold text-foreground">{sensor.humidity}%</p>
+        <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3">
+          <div>
+            <p className="text-xs text-muted-foreground">Humidity</p>
+            <p className="text-sm font-semibold text-foreground">{sensor.humidity}%</p>
+          </div>
+          <div>
+            <p className="text-xs text-muted-foreground flex items-center gap-1">
+              <Battery size={11} /> Battery
+            </p>
+            <p className={`text-sm font-semibold ${batteryColor(sensor.battery)}`}>
+              {sensor.battery}%
+            </p>
+          </div>
         </div>
-        <div>
-          <p className="text-xs text-muted-foreground mb-0.5 flex items-center gap-1">
-            <Battery size={11} /> Battery
-          </p>
-          <p
-            className={`text-lg font-semibold ${
-              sensor.battery < 20
-                ? "text-red-600"
-                : sensor.battery < 50
-                ? "text-amber-600"
-                : "text-green-600"
-            }`}
+
+        {expanded && (
+          <div className="grid grid-cols-2 gap-x-4 gap-y-2 mb-3 pt-3 border-t border-border">
+            <div>
+              <p className="text-xs text-muted-foreground">Temperature</p>
+              <p className="text-sm font-semibold text-foreground">{sensor.temperature}°F</p>
+            </div>
+            <div>
+              <p className="text-xs text-muted-foreground flex items-center gap-1">
+                <Signal size={11} /> Signal
+              </p>
+              <p className="text-sm font-medium text-foreground">{sensor.signal}</p>
+            </div>
+            <div>
+              <p className="text-xs text-muted-foreground">Sensor ID</p>
+              <p className="text-xs font-medium text-foreground">{sensor.id}</p>
+            </div>
+            <div>
+              <p className="text-xs text-muted-foreground">Last Reading</p>
+              <p className="text-xs font-medium text-foreground">{sensor.lastReading}</p>
+            </div>
+          </div>
+        )}
+
+        <div className="flex gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            className="gap-1 text-xs h-8"
+            onClick={() => setExpanded(!expanded)}
           >
-            {sensor.battery}%
-          </p>
+            {expanded ? <><ChevronUp size={13} /> Close</> : <><ChevronDown size={13} /> Details</>}
+          </Button>
+          {expanded && (
+            <Button variant="ghost" size="sm" className="text-xs h-8">
+              Settings
+            </Button>
+          )}
         </div>
       </div>
 
-      {/* Expanded details */}
-      {expanded && (
-        <div className="grid grid-cols-2 gap-3 mb-3 pt-3 border-t border-border">
+      {/* ── Desktop layout ── */}
+      <div className="hidden sm:flex items-center gap-4">
+        <div className={`w-11 h-11 ${styles.bg} rounded-lg flex items-center justify-center flex-shrink-0`}>
+          <Droplets className={styles.icon} size={22} />
+        </div>
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-0.5">
+            <h3 className="text-sm font-semibold text-foreground">{sensor.location}</h3>
+            <Badge className={`${styles.badge} text-xs`}>{sensor.status}</Badge>
+          </div>
+          <p className="text-xs text-muted-foreground flex items-center gap-3">
+            <span className="flex items-center gap-1">
+              <MapPin size={11} />
+              {sensor.room}
+            </span>
+            <span>ID: {sensor.id}</span>
+            <span>Last reading: {sensor.lastReading}</span>
+          </p>
+        </div>
+
+        <div className="flex items-center gap-6 flex-shrink-0">
+          <div>
+            <p className="text-xs text-muted-foreground mb-0.5">Humidity</p>
+            <p className="text-sm font-semibold text-foreground">{sensor.humidity}%</p>
+          </div>
           <div>
             <p className="text-xs text-muted-foreground mb-0.5">Temperature</p>
-            <p className="text-lg font-semibold text-foreground">{sensor.temperature}°F</p>
+            <p className="text-sm font-semibold text-foreground">{sensor.temperature}°F</p>
+          </div>
+          <div>
+            <p className="text-xs text-muted-foreground mb-0.5 flex items-center gap-1">
+              <Battery size={11} /> Battery
+            </p>
+            <p className={`text-sm font-semibold ${batteryColor(sensor.battery)}`}>
+              {sensor.battery}%
+            </p>
           </div>
           <div>
             <p className="text-xs text-muted-foreground mb-0.5 flex items-center gap-1">
@@ -153,40 +220,12 @@ function SensorCard({ sensor }: { sensor: Sensor }) {
             </p>
             <p className="text-sm font-medium text-foreground">{sensor.signal}</p>
           </div>
-          <div>
-            <p className="text-xs text-muted-foreground mb-0.5">Sensor ID</p>
-            <p className="text-sm font-medium text-foreground">{sensor.id}</p>
-          </div>
-          <div>
-            <p className="text-xs text-muted-foreground mb-0.5">Last Reading</p>
-            <p className="text-sm font-medium text-foreground">{sensor.lastReading}</p>
-          </div>
         </div>
-      )}
 
-      {/* Actions */}
-      <div className="flex gap-2 pt-1">
-        <Button
-          variant="outline"
-          size="sm"
-          className="gap-1"
-          onClick={() => setExpanded(!expanded)}
-        >
-          {expanded ? (
-            <>
-              <ChevronUp size={14} /> Close
-            </>
-          ) : (
-            <>
-              <ChevronDown size={14} /> Details
-            </>
-          )}
-        </Button>
-        {expanded && (
-          <Button variant="ghost" size="sm">
-            Settings
-          </Button>
-        )}
+        <div className="flex flex-col gap-1 flex-shrink-0">
+          <Button variant="outline" size="sm" className="text-xs h-8">Details</Button>
+          <Button variant="ghost" size="sm" className="text-xs h-8">Settings</Button>
+        </div>
       </div>
     </Card>
   );
@@ -195,11 +234,13 @@ function SensorCard({ sensor }: { sensor: Sensor }) {
 function SensorList({ items }: { items: Sensor[] }) {
   if (items.length === 0) {
     return (
-      <p className="text-sm text-muted-foreground text-center py-8">No sensors in this category.</p>
+      <p className="text-sm text-muted-foreground text-center py-8">
+        No sensors in this category.
+      </p>
     );
   }
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {items.map((sensor) => (
         <SensorCard key={sensor.id} sensor={sensor} />
       ))}
@@ -251,30 +292,31 @@ export function Sensors() {
       </div>
 
       {/* Search and Filter */}
-      <Card className="p-4">
-        <div className="flex flex-col sm:flex-row gap-3">
+      <Card className="p-3 sm:p-4">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
           <div className="flex-1 relative">
             <Search
               className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
-              size={18}
+              size={16}
             />
             <Input
               type="search"
               placeholder="Search by location, room or ID..."
-              className="pl-10"
+              className="pl-9 h-9 text-sm"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
           </div>
           <Button
             variant={showFilter ? "default" : "outline"}
-            className="gap-2"
+            size="sm"
+            className="gap-2 h-9"
             onClick={() => setShowFilter(!showFilter)}
           >
-            <Filter size={18} />
+            <Filter size={15} />
             Filter
             {filterStatus.length > 0 && (
-              <span className="ml-1 bg-white text-primary rounded-full w-5 h-5 flex items-center justify-center text-xs font-semibold">
+              <span className="ml-1 bg-white text-primary rounded-full w-4 h-4 flex items-center justify-center text-xs font-semibold">
                 {filterStatus.length}
               </span>
             )}
@@ -283,7 +325,7 @@ export function Sensors() {
 
         {showFilter && (
           <div className="flex flex-wrap gap-2 mt-3 pt-3 border-t border-border">
-            <p className="text-xs text-muted-foreground self-center mr-1">Status:</p>
+            <p className="text-xs text-muted-foreground self-center">Status:</p>
             {(["alert", "warning", "normal"] as const).map((status) => (
               <button
                 key={status}
@@ -310,12 +352,20 @@ export function Sensors() {
       </Card>
 
       {/* Tabs */}
-      <Tabs defaultValue="all" className="space-y-4">
+      <Tabs defaultValue="all" className="space-y-3">
         <TabsList className="w-full overflow-x-auto flex">
-          <TabsTrigger value="all" className="flex-1 min-w-fit">All Sensors ({counts.all})</TabsTrigger>
-          <TabsTrigger value="alerts" className="flex-1 min-w-fit">Alerts ({counts.alerts})</TabsTrigger>
-          <TabsTrigger value="warnings" className="flex-1 min-w-fit">Warnings ({counts.warnings})</TabsTrigger>
-          <TabsTrigger value="normal" className="flex-1 min-w-fit">Normal ({counts.normal})</TabsTrigger>
+          <TabsTrigger value="all" className="flex-1 min-w-fit text-xs sm:text-sm">
+            All Sensors ({counts.all})
+          </TabsTrigger>
+          <TabsTrigger value="alerts" className="flex-1 min-w-fit text-xs sm:text-sm">
+            Alerts ({counts.alerts})
+          </TabsTrigger>
+          <TabsTrigger value="warnings" className="flex-1 min-w-fit text-xs sm:text-sm">
+            Warnings ({counts.warnings})
+          </TabsTrigger>
+          <TabsTrigger value="normal" className="flex-1 min-w-fit text-xs sm:text-sm">
+            Normal ({counts.normal})
+          </TabsTrigger>
         </TabsList>
 
         <TabsContent value="all">

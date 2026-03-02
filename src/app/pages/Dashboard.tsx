@@ -31,7 +31,7 @@ export function Dashboard() {
           <div className="flex items-start justify-between">
             <div>
               <p className="text-xs sm:text-sm text-muted-foreground">Active Sensors</p>
-              <p className="text-2xl sm:text-3xl font-semibold mt-2 text-foreground">12</p>
+              <p className="text-2xl sm:text-3xl font-semibold mt-2 text-foreground">6</p>
               <p className="text-xs text-green-600 mt-2 flex items-center gap-1">
                 <CheckCircle size={14} />
                 <span className="hidden sm:inline">All operational</span>
@@ -81,7 +81,7 @@ export function Dashboard() {
           <div className="flex items-start justify-between">
             <div>
               <p className="text-xs sm:text-sm text-muted-foreground">Next Maintenance</p>
-              <p className="text-2xl sm:text-3xl font-semibold mt-2 text-foreground">5</p>
+              <p className="text-2xl sm:text-3xl font-semibold mt-2 text-foreground">3</p>
               <p className="text-xs text-muted-foreground mt-2">days</p>
             </div>
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-lg flex items-center justify-center">
@@ -158,7 +158,7 @@ export function Dashboard() {
             humidity={85}
           />
           <SensorStatusCard
-            location="Basement"
+            location="Basement Floor"
             status="normal"
             lastReading="4 mins ago"
             humidity={50}
