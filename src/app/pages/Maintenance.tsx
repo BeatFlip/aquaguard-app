@@ -218,10 +218,10 @@ function MaintenanceTaskCard({ task }: { task: typeof maintenanceTasks[0] }) {
           <Icon className={config.color} size={24} />
         </div>
 
-        <div className="flex-1">
-          <div className="flex items-start justify-between gap-4 mb-2">
-            <h3 className="text-lg font-semibold text-foreground">{task.title}</h3>
-            <div className="flex items-center gap-2 flex-shrink-0">
+        <div className="flex-1 min-w-0">
+          <div className="mb-2">
+            <div className="flex flex-wrap items-center gap-2 mb-1">
+              <h3 className="text-base sm:text-lg font-semibold text-foreground">{task.title}</h3>
               {task.status !== "completed" && task.priority && (
                 <Badge className={priorityConfig[task.priority as keyof typeof priorityConfig]}>
                   {task.priority}
@@ -236,9 +236,9 @@ function MaintenanceTaskCard({ task }: { task: typeof maintenanceTasks[0] }) {
             </div>
           </div>
 
-          <p className="text-foreground mb-3">{task.description}</p>
+          <p className="text-sm text-foreground mb-3">{task.description}</p>
 
-          <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground mb-4">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-muted-foreground mb-4">
             {task.status !== "completed" && (
               <>
                 <span className="flex items-center gap-1">
@@ -266,7 +266,7 @@ function MaintenanceTaskCard({ task }: { task: typeof maintenanceTasks[0] }) {
           </div>
 
           {task.status === "pending" && (
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-2">
               <Button size="sm">Schedule Now</Button>
               <Button size="sm" variant="outline">
                 Mark as Complete
@@ -278,7 +278,7 @@ function MaintenanceTaskCard({ task }: { task: typeof maintenanceTasks[0] }) {
           )}
 
           {task.status === "scheduled" && (
-            <div className="flex gap-3">
+            <div className="flex flex-wrap gap-2">
               <Button size="sm" variant="outline">
                 View Appointment
               </Button>

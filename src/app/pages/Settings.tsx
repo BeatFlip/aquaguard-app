@@ -50,11 +50,11 @@ export function Settings() {
       </Card>
 
       <Tabs defaultValue="profile" className="space-y-4 sm:space-y-6">
-        <TabsList className="w-full grid grid-cols-2 sm:grid-cols-4">
-          <TabsTrigger value="profile" className="text-xs sm:text-sm">Profile</TabsTrigger>
-          <TabsTrigger value="notifications" className="text-xs sm:text-sm">Notifications</TabsTrigger>
-          <TabsTrigger value="security" className="text-xs sm:text-sm">Security</TabsTrigger>
-          <TabsTrigger value="billing" className="text-xs sm:text-sm">Billing</TabsTrigger>
+        <TabsList className="w-full overflow-x-auto flex">
+          <TabsTrigger value="profile" className="flex-1 min-w-fit text-xs sm:text-sm">Profile</TabsTrigger>
+          <TabsTrigger value="notifications" className="flex-1 min-w-fit text-xs sm:text-sm">Notifications</TabsTrigger>
+          <TabsTrigger value="security" className="flex-1 min-w-fit text-xs sm:text-sm">Security</TabsTrigger>
+          <TabsTrigger value="billing" className="flex-1 min-w-fit text-xs sm:text-sm">Billing</TabsTrigger>
         </TabsList>
 
         {/* Profile Settings */}
