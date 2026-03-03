@@ -1,10 +1,16 @@
-import { Outlet } from "react-router";
-import { useState } from "react";
+import { Outlet, useLocation } from "react-router";
+import { useState, useEffect, useRef } from "react";
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 
 export function Root() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const mainRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    mainRef.current?.scrollTo(0, 0);
+  }, [location.pathname]);
 
   return (
     <div className="flex h-screen bg-background overflow-hidden">
@@ -30,7 +36,7 @@ export function Root() {
 
       <div className="flex-1 flex flex-col overflow-hidden w-full">
         <Header onMenuClick={() => setIsMobileMenuOpen(true)} />
-        <main className="flex-1 overflow-y-auto p-4 sm:p-6">
+        <main ref={mainRef} className="flex-1 overflow-y-auto p-4 sm:p-6">
           <Outlet />
         </main>
       </div>
