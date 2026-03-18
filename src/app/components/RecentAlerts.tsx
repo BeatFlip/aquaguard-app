@@ -1,12 +1,14 @@
-import { AlertTriangle, AlertCircle, Info } from "lucide-react";
+import { AlertTriangle, AlertCircle, Info, Phone } from "lucide-react";
 import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
 
 const alerts = [
   {
     id: 1,
     type: "warning",
     title: "Elevated Humidity - Water Heater",
-    message: "Humidity levels at 85% detected near water heater",
+    message: "Humidity at 85% near your water heater.",
+    nextStep: "Call assistance to schedule an inspection.",
     time: "2 mins ago",
     severity: "high",
   },
@@ -14,7 +16,8 @@ const alerts = [
     id: 2,
     type: "warning",
     title: "Unusual Usage Pattern",
-    message: "Water usage 23% higher than average today",
+    message: "Water usage is 23% above normal today.",
+    nextStep: "Check faucets for drips. Call assistance if usage stays high.",
     time: "15 mins ago",
     severity: "medium",
   },
@@ -22,7 +25,8 @@ const alerts = [
     id: 3,
     type: "info",
     title: "Sensor Battery Low",
-    message: "Kitchen sensor battery at 15% - replacement recommended",
+    message: "Kitchen sensor battery at 15%.",
+    nextStep: "Replace battery within 5 days.",
     time: "1 hour ago",
     severity: "low",
   },
@@ -72,7 +76,18 @@ export function RecentAlerts() {
                 </Badge>
               </div>
               <p className="text-xs sm:text-sm text-muted-foreground line-clamp-2">{alert.message}</p>
-              <p className="text-xs text-muted-foreground mt-1">{alert.time}</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                <span className="font-medium">Next step:</span> {alert.nextStep}
+              </p>
+              <div className="flex items-center gap-2 mt-1.5">
+                <p className="text-xs text-muted-foreground">{alert.time}</p>
+                {alert.severity === "high" && (
+                  <Button variant="ghost" size="sm" className="h-6 px-2 text-xs gap-1">
+                    <Phone size={12} />
+                    Call
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
         );

@@ -9,6 +9,7 @@ import {
   CheckCircle,
   Clock,
   MapPin,
+  Phone,
 } from "lucide-react";
 
 const alerts = [
@@ -16,74 +17,56 @@ const alerts = [
     id: 1,
     severity: "high",
     title: "Elevated Humidity - Water Heater",
-    description: "Humidity levels at 85% detected near water heater. Immediate inspection recommended.",
+    description: "Humidity at 85% near your water heater.",
     location: "Basement - Water Heater",
     sensorId: "WH-001",
     timestamp: "2 mins ago",
     status: "active",
-    recommendations: [
-      "Schedule immediate professional inspection",
-      "Check for visible leaks around water heater",
-      "Verify water heater connections are secure",
-    ],
+    nextStep: "Call assistance to schedule an inspection.",
   },
   {
     id: 2,
     severity: "medium",
     title: "Unusual Usage Pattern Detected",
-    description: "Water usage 23% higher than average today. May indicate a slow leak.",
+    description: "Water usage is 23% above normal today.",
     location: "Master Bathroom",
     sensorId: "MB-001",
     timestamp: "15 mins ago",
     status: "active",
-    recommendations: [
-      "Check all faucets for drips",
-      "Inspect toilet for running water",
-      "Monitor usage over next 24 hours",
-    ],
+    nextStep: "Check faucets for drips. Call assistance if usage stays high.",
   },
   {
     id: 3,
     severity: "low",
     title: "Sensor Battery Low",
-    description: "Kitchen sensor battery at 15% - replacement recommended within 5 days.",
+    description: "Kitchen sensor battery at 15%.",
     location: "Kitchen Sink",
     sensorId: "KS-001",
     timestamp: "1 hour ago",
     status: "active",
-    recommendations: [
-      "Order replacement batteries",
-      "Schedule battery replacement",
-    ],
+    nextStep: "Replace battery within 5 days.",
   },
   {
     id: 4,
     severity: "medium",
     title: "Weak Signal Strength",
-    description: "Basement sensor showing weak connection to hub. May affect monitoring reliability.",
+    description: "Basement sensor has weak connection.",
     location: "Basement Floor",
     sensorId: "BS-001",
     timestamp: "3 hours ago",
     status: "acknowledged",
-    recommendations: [
-      "Check sensor placement",
-      "Consider adding a signal repeater",
-      "Verify hub is powered on",
-    ],
+    nextStep: "Move sensor closer to hub or call assistance.",
   },
   {
     id: 5,
     severity: "high",
     title: "Rapid Humidity Increase",
-    description: "Humidity jumped from 42% to 78% in 10 minutes at guest bathroom.",
+    description: "Humidity spike detected in guest bathroom.",
     location: "Guest Bathroom",
     sensorId: "GB-001",
     timestamp: "Yesterday",
     status: "resolved",
-    recommendations: [
-      "Verified as shower usage",
-      "Normal pattern detected",
-    ],
+    nextStep: "Resolved — confirmed as normal shower usage.",
   },
 ];
 
@@ -230,7 +213,7 @@ function AlertCard({ alert }: { alert: typeof alerts[0] }) {
           <div className={`w-12 h-12 ${config.bgColor} rounded-lg flex items-center justify-center flex-shrink-0`}>
             <Icon className={config.color} size={24} />
           </div>
-          
+
           <div className="flex-1">
             <div className="flex items-start justify-between gap-4 mb-2">
               <h3 className="text-lg font-semibold text-foreground">
@@ -246,9 +229,12 @@ function AlertCard({ alert }: { alert: typeof alerts[0] }) {
                 )}
               </div>
             </div>
-            
-            <p className="text-foreground mb-3">{alert.description}</p>
-            
+
+            <p className="text-foreground mb-1">{alert.description}</p>
+            <p className="text-sm text-muted-foreground mb-3">
+              <span className="font-medium">Next step:</span> {alert.nextStep}
+            </p>
+
             <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1">
                 <MapPin size={14} />
@@ -263,47 +249,17 @@ function AlertCard({ alert }: { alert: typeof alerts[0] }) {
           </div>
         </div>
 
-        {/* Recommendations */}
-        {alert.recommendations.length > 0 && (
-          <div className="bg-muted/50 rounded-lg p-4">
-            <h4 className="text-sm font-medium text-foreground mb-2">
-              Recommended Actions
-            </h4>
-            <ul className="space-y-2">
-              {alert.recommendations.map((rec, index) => (
-                <li key={index} className="text-sm text-foreground flex items-start gap-2">
-                  <span className="text-blue-600 mt-0.5">•</span>
-                  <span>{rec}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
         {/* Actions */}
         <div className="flex flex-wrap gap-2 pt-2">
-          {alert.status === "active" && (
-            <>
-              <Button size="sm">Acknowledge</Button>
-              <Button size="sm" variant="outline">
-                Schedule Service
-              </Button>
-              <Button size="sm" variant="ghost">
-                Mark as Resolved
-              </Button>
-            </>
-          )}
-          {alert.status === "acknowledged" && (
-            <>
-              <Button size="sm">Mark as Resolved</Button>
-              <Button size="sm" variant="outline">
-                View Details
-              </Button>
-            </>
+          {(alert.status === "active" || alert.status === "acknowledged") && (
+            <Button size="sm" className="gap-2">
+              <Phone size={16} />
+              Call Assistance
+            </Button>
           )}
           {alert.status === "resolved" && (
             <Button size="sm" variant="outline">
-              View Resolution Details
+              View Details
             </Button>
           )}
         </div>

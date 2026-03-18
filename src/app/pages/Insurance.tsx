@@ -18,7 +18,7 @@ export function Insurance() {
       <div>
         <h1 className="text-2xl sm:text-3xl font-semibold text-foreground">Insurance Partnership</h1>
         <p className="text-sm sm:text-base text-muted-foreground mt-1">
-          Save money while protecting your home
+          Insurance-backed sensors that protect your home and reduce costs
         </p>
       </div>
 
@@ -57,6 +57,42 @@ export function Insurance() {
         </div>
       </Card>
 
+      {/* How Insurance-Subsidized Sensors Work */}
+      <Card className="p-4 sm:p-6">
+        <h2 className="text-lg font-semibold text-foreground mb-6">
+          How Insurance-Subsidized Sensors Work
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="bg-blue-50 dark:bg-blue-950/50 rounded-lg p-4 sm:p-6 text-center">
+            <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center mx-auto mb-3">
+              <Shield className="text-blue-600 dark:text-blue-400" size={24} />
+            </div>
+            <p className="text-sm font-medium text-foreground mb-1">1. Insurance Subsidizes Sensors</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Your insurer covers up to 70% of sensor costs
+            </p>
+          </div>
+          <div className="bg-green-50 dark:bg-green-950/50 rounded-lg p-4 sm:p-6 text-center">
+            <div className="w-12 h-12 bg-green-100 dark:bg-green-900/50 rounded-full flex items-center justify-center mx-auto mb-3">
+              <TrendingDown className="text-green-600 dark:text-green-400" size={24} />
+            </div>
+            <p className="text-sm font-medium text-foreground mb-1">2. Leaks Are Caught Early</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Sensors detect issues before costly claims
+            </p>
+          </div>
+          <div className="bg-purple-50 dark:bg-purple-950/50 rounded-lg p-4 sm:p-6 text-center">
+            <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-3">
+              <DollarSign className="text-purple-600 dark:text-purple-400" size={24} />
+            </div>
+            <p className="text-sm font-medium text-foreground mb-1">3. Everyone Saves Money</p>
+            <p className="text-xs sm:text-sm text-muted-foreground">
+              Fewer claims = lower premiums for you
+            </p>
+          </div>
+        </div>
+      </Card>
+
       {/* Benefits Overview */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <Card className="p-6">
@@ -68,7 +104,7 @@ export function Insurance() {
               Risk Reduction Impact
             </h2>
           </div>
-          
+
           <div className="space-y-4">
             <div>
               <div className="flex items-center justify-between mb-2">
@@ -80,7 +116,7 @@ export function Insurance() {
                 Reduced from High to Low since installation
               </p>
             </div>
-            
+
             <div>
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm text-muted-foreground">Claim Likelihood</span>
@@ -91,11 +127,17 @@ export function Insurance() {
                 Based on monitoring data and preventive actions
               </p>
             </div>
-            
-            <div className="bg-green-50 rounded-lg p-4 mt-4">
-              <p className="text-sm text-green-800">
+
+            <div className="bg-green-50 dark:bg-green-950/50 rounded-lg p-4 mt-4">
+              <p className="text-sm text-green-800 dark:text-green-300">
                 <strong>Excellent Progress!</strong> Your proactive monitoring has
                 significantly reduced your home's risk profile.
+              </p>
+            </div>
+
+            <div className="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
+              <p className="text-sm text-blue-800 dark:text-blue-300">
+                Every prevented claim saves your insurer an average of <strong>$11,000</strong> — savings they pass back through lower premiums and subsidized sensor costs.
               </p>
             </div>
           </div>
@@ -110,8 +152,18 @@ export function Insurance() {
               Program Benefits
             </h2>
           </div>
-          
+
           <div className="space-y-3">
+            <div className="flex items-start gap-3">
+              <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
+              <div>
+                <p className="font-medium text-foreground">Insurance-Subsidized Sensors</p>
+                <p className="text-sm text-muted-foreground">
+                  Up to 70% of your sensor hardware cost is covered by your insurance partner
+                </p>
+              </div>
+            </div>
+
             <div className="flex items-start gap-3">
               <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
               <div>
@@ -121,7 +173,7 @@ export function Insurance() {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
               <div>
@@ -131,7 +183,7 @@ export function Insurance() {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
               <div>
@@ -141,7 +193,7 @@ export function Insurance() {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
               <div>
@@ -151,7 +203,7 @@ export function Insurance() {
                 </p>
               </div>
             </div>
-            
+
             <div className="flex items-start gap-3">
               <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
               <div>
@@ -170,7 +222,7 @@ export function Insurance() {
         <h2 className="text-lg font-semibold text-foreground mb-6">
           Claims Prevention History
         </h2>
-        
+
         <div className="space-y-4">
           <div className="flex items-start gap-4 pb-4 border-b border-border">
             <div className="w-12 h-12 bg-green-50 rounded-lg flex items-center justify-center flex-shrink-0">
@@ -237,7 +289,7 @@ export function Insurance() {
         <h2 className="text-lg font-semibold text-foreground mb-6">
           Insurance Documents
         </h2>
-        
+
         <div className="space-y-3">
           <div className="flex items-center justify-between p-4 border border-border rounded-lg hover:bg-accent transition-colors">
             <div className="flex items-center gap-3">

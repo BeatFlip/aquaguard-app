@@ -14,6 +14,11 @@ import {
   Lock,
   CreditCard,
   Moon,
+  Eye,
+  CheckCircle,
+  Info,
+  Download,
+  Trash2,
 } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -55,6 +60,7 @@ export function Settings() {
           <TabsTrigger value="notifications" className="flex-1 min-w-fit text-xs sm:text-sm">Notifications</TabsTrigger>
           <TabsTrigger value="security" className="flex-1 min-w-fit text-xs sm:text-sm">Security</TabsTrigger>
           <TabsTrigger value="billing" className="flex-1 min-w-fit text-xs sm:text-sm">Billing</TabsTrigger>
+          <TabsTrigger value="privacy" className="flex-1 min-w-fit text-xs sm:text-sm">Privacy</TabsTrigger>
         </TabsList>
 
         {/* Profile Settings */}
@@ -379,6 +385,139 @@ export function Settings() {
                       <Button variant="ghost" size="sm">Download</Button>
                     </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+        </TabsContent>
+
+        {/* Privacy & Data Transparency */}
+        <TabsContent value="privacy">
+          <Card className="p-4 sm:p-6">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="w-12 h-12 bg-teal-100 dark:bg-teal-900/50 rounded-lg flex items-center justify-center">
+                <Eye className="text-teal-600 dark:text-teal-400" size={24} />
+              </div>
+              <h2 className="text-lg font-semibold text-foreground">
+                Privacy & Data Transparency
+              </h2>
+            </div>
+
+            <div className="space-y-6">
+              {/* Section A — What Data We Collect */}
+              <div>
+                <h3 className="font-medium text-foreground mb-3">What Data We Collect</h3>
+                <ul className="space-y-2 text-sm text-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-teal-600 mt-0.5">•</span>
+                    <span>Humidity and moisture levels from sensors</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-teal-600 mt-0.5">•</span>
+                    <span>Water usage patterns and trends</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-teal-600 mt-0.5">•</span>
+                    <span>Sensor battery status and connectivity</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-teal-600 mt-0.5">•</span>
+                    <span>Alert history and response actions</span>
+                  </li>
+                </ul>
+                <p className="text-sm text-muted-foreground mt-3">
+                  We do <strong>NOT</strong> collect personal browsing data, audio, or video.
+                </p>
+              </div>
+
+              {/* Section B — Who Can Access Your Data */}
+              <div className="border-t border-border pt-6">
+                <h3 className="font-medium text-foreground mb-3">Who Can Access Your Data</h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
+                    <div>
+                      <p className="font-medium text-foreground">You</p>
+                      <p className="text-sm text-muted-foreground">
+                        Full access to all your sensor data and history
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
+                    <div>
+                      <p className="font-medium text-foreground">AquaGuard Team</p>
+                      <p className="text-sm text-muted-foreground">
+                        Anonymized data only — used to improve system performance
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
+                    <div>
+                      <p className="font-medium text-foreground">Insurance Partner</p>
+                      <p className="text-sm text-muted-foreground">
+                        Only aggregated risk scores — never raw sensor readings
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <p className="text-sm text-muted-foreground mt-3">
+                  We <strong>never</strong> sell your data to third parties.
+                </p>
+              </div>
+
+              {/* Section C — How Your Data Benefits You */}
+              <div className="border-t border-border pt-6">
+                <h3 className="font-medium text-foreground mb-3">How Your Data Benefits You</h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
+                    <div>
+                      <p className="text-sm text-foreground">
+                        Early leak detection saves an average of <strong>$2,000</strong> per incident
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
+                    <div>
+                      <p className="text-sm text-foreground">
+                        Sharing risk scores earns a <strong>15% premium discount</strong>
+                      </p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="text-green-600 flex-shrink-0 mt-0.5" size={18} />
+                    <div>
+                      <p className="text-sm text-foreground">
+                        Usage patterns help optimize your water consumption
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mt-4">
+                  <div className="flex items-start gap-3">
+                    <Info className="text-blue-600 flex-shrink-0 mt-0.5" size={18} />
+                    <p className="text-sm text-blue-800 dark:text-blue-300">
+                      All data is encrypted in transit and at rest. You can export or delete your data at any time.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Section D — Action Buttons */}
+              <div className="border-t border-border pt-6">
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Button className="gap-2">
+                    <Download size={16} />
+                    Download My Data
+                  </Button>
+                  <Button variant="outline" className="gap-2">
+                    <Trash2 size={16} />
+                    Request Data Deletion
+                  </Button>
                 </div>
               </div>
             </div>
